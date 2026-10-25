@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chalkroom | Sales Enablement Platform &amp; Interactive Content</title>
+<meta name="description" content="Chalkroom is a sales enablement platform that helps sales and marketing teams create, personalise, share and measure interactive content in one place." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#1b1b17;
+    --ink-soft:#2b2b24;
+    --cream:#faf7ef;
+    --cream-2:#f3ede0;
+    --paper:#ffffff;
+    --green:#3c5a44;
+    --green-deep:#2f4836;
+    --green-tint:#dce8dc;
+    --peach:#f6dcc6;
+    --peach-2:#f7e6d6;
+    --orange:#d2863c;
+    --muted:#6c6c60;
+    --muted-light:#b9b6ab;
+    --line:rgba(27,27,23,0.12);
+    --line-dark:rgba(255,255,255,0.14);
+    --shadow:0 24px 60px -24px rgba(27,27,23,0.35);
+    --shadow-sm:0 10px 30px -16px rgba(27,27,23,0.4);
+    --radius:18px;
+    --radius-lg:26px;
+    --maxw:1140px;
+    --sans:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--green);
+  }
+  .serif{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-height:1.04;}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-family:var(--sans);font-weight:600;font-size:15px;
+    padding:13px 22px;border-radius:999px;border:1.5px solid transparent;
+    cursor:pointer;transition:transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--green);color:#fff;box-shadow:0 10px 24px -12px rgba(60,90,68,0.9);}
+  .btn-primary:hover{background:var(--green-deep);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-1px);}
+  .btn-ghost-light{background:transparent;color:#fff;border-color:var(--line-dark);}
+  .btn-ghost-light:hover{border-color:#fff;background:rgba(255,255,255,0.06);}
+  .btn svg{width:16px;height:16px;}
+
+  /* Nav */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,239,0.86);
+    backdrop-filter:saturate(1.3) blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.02em;}
+  .brand .mark{width:26px;height:26px;color:var(--green);flex:none;}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:15px;font-weight:500;color:var(--ink-soft);}
+  .nav-links a{display:inline-flex;align-items:center;gap:5px;transition:color .18s ease;}
+  .nav-links a:hover{color:var(--green);}
+  .nav-links .caret{width:11px;height:11px;opacity:.55;}
+  .nav-cta{display:flex;align-items:center;gap:12px;}
+
+  /* Hero */
+  .hero{background:var(--ink);color:#f4f1e8;position:relative;overflow:hidden;}
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(900px 420px at 72% -8%, rgba(60,90,68,0.42), transparent 60%),
+      radial-gradient(700px 360px at 8% 120%, rgba(210,134,60,0.16), transparent 60%);
+  }
+  .hero-inner{position:relative;z-index:1;padding:92px 0 78px;text-align:center;}
+  .hero .eyebrow{color:#aebfa9;}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(46px,8.4vw,92px);line-height:0.98;margin:18px 0 0;letter-spacing:-.02em;}
+  .hero p.sub{
+    max-width:640px;margin:22px auto 0;color:#cfcbbf;font-size:clamp(16px,2vw,19px);line-height:1.6;
+  }
+  .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px;}
+
+  /* Flow steps */
+  .flow{margin-top:66px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;align-items:start;}
+  .step{position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;padding:0 10px;}
+  .step .ring{
+    width:62px;height:62px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.28);
+    display:flex;align-items:center;justify-content:center;color:#e9e5d8;background:rgba(255,255,255,0.03);
+  }
+  .step .ring svg{width:26px;height:26px;}
+  .step .stepname{font-weight:600;font-size:15px;color:#f1ede1;}
+  .step .stepdesc{font-size:12.5px;color:#a8a89c;line-height:1.45;max-width:170px;}
+  .step:not(:last-child)::after{
+    content:"";position:absolute;top:31px;right:-50%;width:100%;
+    border-top:1.5px dashed rgba(255,255,255,0.22);
+  }
+
+  /* Section scaffolding */
+  section{padding:86px 0;}
+  .feature{display:grid;grid-template-columns:1fr 1.05fr;gap:58px;align-items:center;}
+  .feature.flip .copy{order:2;}
+  .feature.flip .visual{order:1;}
+  .copy h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.4vw,50px);margin:14px 0 0;letter-spacing:-.015em;line-height:1.02;}
+  .copy p.lead{font-size:17.5px;color:var(--muted);margin:18px 0 0;max-width:460px;}
+  .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .tag{
+    font-size:13px;font-weight:500;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:999px;padding:7px 15px;background:rgba(255,255,255,0.4);
+  }
+  .sec-cream{background:var(--cream);}
+  .sec-peach{background:var(--peach);}
+  .sec-sage{background:var(--green-tint);}
+  .sec-paper{background:var(--cream-2);}
+  .sec-peach .tag,.sec-sage .tag{background:rgba(255,255,255,0.55);}
+
+  /* Generic mockup card */
+  .mock{
+    background:var(--ink);border-radius:var(--radius-lg);box-shadow:var(--shadow);
+    padding:20px;color:#e9e5d8;border:1px solid rgba(255,255,255,0.06);
+  }
+  .mock-bar{display:flex;align-items:center;gap:7px;margin-bottom:16px;}
+  .mock-bar .dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.22);}
+  .mock-title{margin-left:8px;font-size:12.5px;color:#b7b4a8;font-weight:500;letter-spacing:.02em;}
+
+  /* Curation mockup */
+  .curate-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;}
+  .panel{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;}
+  .panel h4{margin:0 0 12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9fb49c;font-weight:600;}
+  .row-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:13.5px;color:#d9d6ca;}
+  .row-item:last-child{border-bottom:0;}
+  .toggle{width:34px;height:19px;border-radius:999px;background:var(--green);position:relative;flex:none;}
+  .toggle::after{content:"";position:absolute;top:2px;right:2px;width:15px;height:15px;border-radius:50%;background:#fff;}
+  .toggle.off{background:rgba(255,255,255,0.18);}
+  .toggle.off::after{right:auto;left:2px;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+  .mini-pill{font-size:11.5px;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,0.08);color:#cfccc0;}
+  .mini-pill.active{background:var(--orange);color:#231a10;font-weight:600;}
+  .curate-note{margin-top:14px;font-size:12.5px;color:#9b988d;text-align:center;}
+
+  /* Analytics mockup */
+  .stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px;}
+  .stat .k{font-size:11px;color:#9a978c;letter-spacing:.03em;}
+  .stat .v{font-family:var(--serif);font-weight:600;font-size:22px;color:#f1ede1;margin-top:3px;}
+  .analytics-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;}
+  .bars{display:flex;flex-direction:column;gap:11px;}
+  .bar-line{display:flex;align-items:center;gap:10px;font-size:12px;color:#c6c3b7;}
+  .bar-line .lbl{width:74px;flex:none;color:#a7a499;}
+  .bar-track{flex:1;height:9px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden;}
+  .bar-fill{height:100%;background:linear-gradient(90deg,var(--orange),#e0a768);border-radius:999px;}
+  .donut-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;}
+  .donut{
+    width:118px;height:118px;border-radius:50%;
+    background:conic-gradient(var(--green) 0 68%, var(--orange) 68% 92%, #8fb08f 92% 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .donut .hole{width:70px;height:70px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;font-size:11px;color:#b7b4a8;text-align:center;line-height:1.3;}
+  .legend{display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:#bdbab0;}
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:9px;height:9px;border-radius:3px;display:inline-block;}
+
+  /* Interactive media tiles (replaces dead "Drag to rotate" widgets) */
+  .media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .media-tile{
+    position:relative;border-radius:var(--radius);overflow:hidden;
+    aspect-ratio:3/4;border:1px solid rgba(27,27,23,0.1);box-shadow:var(--shadow-sm);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    color:#fff;
+  }
+  .media-tile .scene{position:absolute;inset:0;}
+  .media-tile .cap{position:relative;z-index:2;padding:16px;background:linear-gradient(to top,rgba(11,11,8,0.82),rgba(11,11,8,0.0));}
+  .media-tile .type{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.9;}
+  .media-tile .name{font-family:var(--serif);font-weight:500;font-size:19px;margin-top:3px;line-height:1.1;}
+  .media-badge{
+    position:absolute;z-index:2;top:12px;left:12px;
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:600;color:#fff;
+    background:rgba(11,11,8,0.5);backdrop-filter:blur(4px);
+    padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);
+  }
+  .media-badge svg{width:12px;height:12px;}
+  /* tour scene */
+  .scene-tour{background:
+    radial-gradient(120% 90% at 50% 10%, #6f8f74, #324a39 70%);}
+  .scene-tour .floor{position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(to top,#20302592,transparent);}
+  .scene-tour .door{position:absolute;left:50%;top:34%;width:38%;height:48%;transform:translateX(-50%);border:2px solid rgba(255,255,255,0.5);border-bottom:none;border-radius:8px 8px 0 0;background:rgba(255,255,255,0.06);}
+  /* 3d model scene */
+  .scene-model{background:radial-gradient(120% 100% at 50% 20%, #3b4a63, #171f2c 75%);}
+  .scene-model .cube{position:absolute;left:50%;top:44%;width:92px;height:92px;transform:translate(-50%,-50%) rotateX(16deg) rotateY(-28deg);transform-style:preserve-3d;}
+  .scene-model .face{position:absolute;width:92px;height:92px;border:1.5px solid rgba(255,255,255,0.65);background:rgba(126,160,214,0.12);}
+  .scene-model .f1{transform:translateZ(46px);}
+  .scene-model .f2{transform:rotateY(90deg) translateZ(46px);background:rgba(126,160,214,0.22);}
+  .scene-model .f3{transform:rotateX(90deg) translateZ(46px);background:rgba(126,160,214,0.06);}
+  /* map scene */
+  .scene-map{background:#28352a;background-image:
+    linear-gradient(rgba(255,255,255,0.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.06) 1px,transparent 1px);
+    background-size:26px 26px;}
+  .scene-map .road{position:absolute;top:0;bottom:0;left:40%;width:12px;background:rgba(210,134,60,0.5);transform:skewX(-10deg);}
+  .scene-map .road2{position:absolute;left:0;right:0;top:52%;height:12px;background:rgba(255,255,255,0.14);}
+  .scene-map .pin{position:absolute;left:46%;top:40%;width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--orange);transform:rotate(-45deg);border:2px solid #fff;}
+
+  /* Governance library mockup */
+  .lib-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .lib-head .ttl{font-size:13.5px;font-weight:600;color:#eee9dc;}
+  .seg{display:flex;gap:6px;}
+  .seg b{font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;}
+  .seg .on{background:var(--green);color:#fff;}
+  .seg .off{background:rgba(255,255,255,0.08);color:#bdbab0;}
+  .lib-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .doc{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:13px;display:flex;flex-direction:column;gap:9px;}
+  .doc .ico{width:26px;height:26px;color:#9fb49c;}
+  .doc .dname{font-size:12px;color:#d6d3c7;line-height:1.3;}
+  .access{font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:999px;align-self:flex-start;}
+  .access.all{background:var(--orange);color:#231a10;}
+  .access.team{background:#4e8a5f;color:#fff;}
+
+  /* Who it's for / trust */
+  .center-head{text-align:center;max-width:720px;margin:0 auto;}
+  .center-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(32px,4.8vw,52px);margin:14px 0 0;letter-spacing:-.015em;line-height:1.03;}
+  .center-head p{color:var(--muted);font-size:18px;margin:18px auto 0;max-width:600px;}
+  .who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px;}
+  .who-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 26px;box-shadow:var(--shadow-sm);
+  }
+  .who-card .ic{width:44px;height:44px;border-radius:12px;background:var(--green-tint);color:var(--green-deep);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .who-card .ic svg{width:22px;height:22px;}
+  .who-card h3{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 8px;}
+  .who-card p{margin:0;color:var(--muted);font-size:15px;}
+
+  .valuebar{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .valuebar .v{padding:28px 20px;text-align:center;border-right:1px solid var(--line);}
+  .valuebar .v:last-child{border-right:0;}
+  .valuebar .v h4{font-family:var(--serif);font-weight:600;font-size:17px;margin:0 0 6px;color:var(--green-deep);}
+  .valuebar .v p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.45;}
+
+  /* Final CTA */
+  .cta{background:var(--ink);color:#f4f1e8;text-align:center;position:relative;overflow:hidden;}
+  .cta::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(760px 340px at 50% -20%, rgba(60,90,68,0.5), transparent 62%);}
+  .cta-inner{position:relative;z-index:1;padding:90px 0;}
+  .cta .status{
+    display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;letter-spacing:.02em;
+    color:#cfe0c9;background:rgba(60,90,68,0.28);border:1px solid rgba(143,176,143,0.4);
+    padding:8px 16px;border-radius:999px;
+  }
+  .cta .status .live{width:8px;height:8px;border-radius:50%;background:#7fd08a;box-shadow:0 0 0 4px rgba(127,208,138,0.22);}
+  .cta h2{font-family:var(--serif);font-weight:500;font-size:clamp(34px,5.4vw,58px);margin:22px 0 0;letter-spacing:-.02em;line-height:1.02;}
+  .cta p{color:#cfcbbf;font-size:18px;margin:18px auto 0;max-width:540px;}
+  .cta .btn-row{margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .cta .fineprint{margin-top:18px;font-size:13px;color:#99958a;}
+
+  /* Footer */
+  footer{background:var(--cream-2);border-top:1px solid var(--line);padding:70px 0 34px;}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;gap:34px;}
+  .foot-brand .brand{font-size:22px;}
+  .foot-brand p{color:var(--muted);font-size:14.5px;margin:16px 0 0;max-width:260px;}
+  .foot-col h5{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 16px;font-weight:600;}
+  .foot-col a{display:block;color:var(--muted);font-size:14.5px;padding:6px 0;transition:color .16s ease;}
+  .foot-col a:hover{color:var(--green);}
+  .foot-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted);flex-wrap:wrap;}
+  .foot-bottom a:hover{color:var(--green);}
+
+  /* Responsive */
+  @media (max-width:980px){
+    .nav-links{display:none;}
+    .feature{grid-template-columns:1fr;gap:34px;}
+    .feature.flip .copy{order:1;}
+    .feature.flip .visual{order:2;}
+    .who-grid{grid-template-columns:1fr;}
+    .valuebar{grid-template-columns:repeat(2,1fr);}
+    .valuebar .v:nth-child(2){border-right:0;}
+    .valuebar .v:nth-child(1),.valuebar .v:nth-child(2){border-bottom:1px solid var(--line);}
+    .foot-top{grid-template-columns:1fr 1fr;gap:28px;}
+    .foot-brand{grid-column:1 / -1;}
+  }
+  @media (max-width:720px){
+    section{padding:62px 0;}
+    .hero-inner{padding:66px 0 58px;}
+    .flow{grid-template-columns:repeat(2,1fr);gap:34px 0;}
+    .step:not(:last-child)::after{display:none;}
+    .curate-grid,.analytics-grid{grid-template-columns:1fr;}
+    .stat-row{grid-template-columns:repeat(2,1fr);}
+    .media-grid{grid-template-columns:1fr;max-width:340px;margin:0 auto;}
+    .lib-grid{grid-template-columns:repeat(2,1fr);}
+    .valuebar{grid-template-columns:1fr;}
+    .valuebar .v{border-right:0;border-bottom:1px solid var(--line);}
+    .valuebar .v:last-child{border-bottom:0;}
+  }
+  @media (max-width:440px){
+    .wrap{padding:0 18px;}
+    .foot-top{grid-template-columns:1fr;}
+    .lib-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Chalkroom home">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="16" cy="18" r="1.4" fill="currentColor" stroke="none"/>
+        <line x1="16" y1="18" x2="16" y2="4"/><circle cx="16" cy="3" r="1.2" fill="currentColor" stroke="none"/>
+        <line x1="16" y1="18" x2="7" y2="9"/><circle cx="6" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+        <line x1="16" y1="18" x2="25" y2="9"/><circle cx="26" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+        <line x1="16" y1="18" x2="10" y2="6"/><circle cx="9" cy="5" r="1" fill="currentColor" stroke="none"/>
+        <line x1="16" y1="18" x2="22" y2="6"/><circle cx="23" cy="5" r="1" fill="currentColor" stroke="none"/>
+        <line x1="16" y1="18" x2="16" y2="28"/>
+      </svg>
+      Chalkroom.
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">About</a>
+      <a href="#features">Use Cases
+        <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l4 4 4-4"/></svg>
+      </a>
+      <a href="#who">Teams
+        <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l4 4 4-4"/></svg>
+      </a>
+      <a href="#features">Industries
+        <svg class="caret" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4l4 4 4-4"/></svg>
+      </a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="#demo">Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO (rendered once) -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Sales enablement platform</p>
+    <h1>Intelligent Content</h1>
+    <p class="sub">Chalkroom helps sales and marketing teams create, personalise, share and track their content. It turns static PDFs into interactive content where engagement is actually measured.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#demo">Book a demo</a>
+      <a class="btn btn-ghost-light" href="#features">See use cases</a>
+    </div>
+
+    <div class="flow" role="list" aria-label="How Chalkroom works">
+      <div class="step" role="listitem">
+        <div class="ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1.3"/><rect x="3" y="11" width="18" height="5" rx="1.3"/><path d="M6 18.5h12"/></svg>
+        </div>
+        <div class="stepname">Curate</div>
+        <div class="stepdesc">Build one asset and shape it for every audience.</div>
+      </div>
+      <div class="step" role="listitem">
+        <div class="ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="5" y1="7" x2="19" y2="7"/><circle cx="9" cy="7" r="2.3"/><line x1="5" y1="17" x2="19" y2="17"/><circle cx="15" cy="17" r="2.3"/></svg>
+        </div>
+        <div class="stepname">Personalise</div>
+        <div class="stepdesc">Tailor sections to each recipient in one click.</div>
+      </div>
+      <div class="step" role="listitem">
+        <div class="ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-8-8-4 19-6z"/></svg>
+        </div>
+        <div class="stepname">Share</div>
+        <div class="stepdesc">Send a secure, trackable link in seconds.</div>
+      </div>
+      <div class="step" role="listitem">
+        <div class="ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+        </div>
+        <div class="stepname">Measure</div>
+        <div class="stepdesc">See what your audience views and explores.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div id="features"></div>
+
+<!-- Feature 1: Curatable -->
+<section class="sec-cream">
+  <div class="wrap feature">
+    <div class="copy">
+      <span class="eyebrow">Content curation</span>
+      <h2>Curatable.</h2>
+      <p class="lead">Create one asset and adapt it for different audiences without duplicating a thing. Update the source once and every share stays in step.</p>
+      <div class="tags">
+        <span class="tag">Microsites</span>
+        <span class="tag">Sell Sheets</span>
+        <span class="tag">Proposals</span>
+        <span class="tag">Quote Templates</span>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mock-title">Riverside Quarter / Share Instance</span></div>
+        <div class="curate-grid">
+          <div class="panel">
+            <h4>Content sections</h4>
+            <div class="row-item">Welcome <span class="toggle"></span></div>
+            <div class="row-item">Your Apartment <span class="toggle"></span></div>
+            <div class="row-item">Appliance Guides <span class="toggle"></span></div>
+            <div class="row-item">Amenities <span class="toggle off"></span></div>
+            <div class="row-item">Local Area <span class="toggle"></span></div>
+          </div>
+          <div class="panel">
+            <h4>Personalisation</h4>
+            <div class="pill-row">
+              <span class="mini-pill active">Resident</span>
+              <span class="mini-pill">Investor</span>
+              <span class="mini-pill">Agent</span>
+            </div>
+            <div style="margin-top:16px;font-size:12.5px;color:#b7b4a8;line-height:1.5;">Audience set to <b style="color:#eadfce;">Resident</b>. Five sections published to this link.</div>
+            <div class="curate-note">Tailor your content with one simple click.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 2: Insightful -->
+<section class="sec-peach">
+  <div class="wrap feature flip">
+    <div class="copy">
+      <span class="eyebrow">Engagement tracking</span>
+      <h2>Insightful.</h2>
+      <p class="lead">Understand how your content is viewed, shared and explored. Go beyond opens and clicks with detailed engagement insights that reveal what matters most to your audience.</p>
+      <div class="tags">
+        <span class="tag">Sales Enablement</span>
+        <span class="tag">White Papers &amp; Reports</span>
+        <span class="tag">Quote Template</span>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="mock" aria-hidden="true">
+        <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="mock-title">Engagement / Example share</span></div>
+        <div class="stat-row">
+          <div class="stat"><div class="k">Sessions</div><div class="v">847</div></div>
+          <div class="stat"><div class="k">Avg duration</div><div class="v">4m 32s</div></div>
+          <div class="stat"><div class="k">Devices</div><div class="v">23</div></div>
+          <div class="stat"><div class="k">Last active</div><div class="v">2h</div></div>
+        </div>
+        <div class="analytics-grid">
+          <div class="panel">
+            <h4>Page engagement</h4>
+            <div class="bars">
+              <div class="bar-line"><span class="lbl">Welcome</span><span class="bar-track"><span class="bar-fill" style="width:92%"></span></span></div>
+              <div class="bar-line"><span class="lbl">Summary</span><span class="bar-track"><span class="bar-fill" style="width:74%"></span></span></div>
+              <div class="bar-line"><span class="lbl">Floor Plans</span><span class="bar-track"><span class="bar-fill" style="width:58%"></span></span></div>
+              <div class="bar-line"><span class="lbl">Gallery</span><span class="bar-track"><span class="bar-fill" style="width:41%"></span></span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h4>Device breakdown</h4>
+            <div class="donut-wrap">
+              <div class="donut"><div class="hole">Example<br/>data</div></div>
+              <div class="legend">
+                <span><i style="background:var(--green)"></i>Desktop 68%</span>
+                <span><i style="background:var(--orange)"></i>Mobile 24%</span>
+                <span><i style="background:#8fb08f"></i>Tablet 8%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 3: Interactive (dead widgets replaced with clean static media tiles) -->
+<section class="sec-sage">
+  <div class="wrap feature">
+    <div class="copy">
+      <span class="eyebrow">Interactive content</span>
+      <h2>Interactive.</h2>
+      <p class="lead">Embed 360 tours, 3D models, video walkthroughs and live maps directly into your share links. Your audience does not just read your content, they explore it.</p>
+      <div class="tags">
+        <span class="tag">Digital Sales Rooms</span>
+        <span class="tag">Portfolios</span>
+        <span class="tag">Presentations</span>
+        <span class="tag">Consultations</span>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="media-grid" aria-label="Embeddable interactive media types">
+        <div class="media-tile">
+          <div class="scene scene-tour"><span class="floor"></span><span class="door"></span></div>
+          <span class="media-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3a9 4 0 1 0 0 8"/><path d="M3 7v6a9 4 0 0 0 18 0V7"/></svg>
+            360 tour
+          </span>
+          <div class="cap"><div class="type">Embed</div><div class="name">Virtual walkthrough</div></div>
+        </div>
+        <div class="media-tile">
+          <div class="scene scene-model"><div class="cube"><span class="face f1"></span><span class="face f2"></span><span class="face f3"></span></div></div>
+          <span class="media-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5"/><path d="M12 12v10"/><path d="M12 12L3 7"/></svg>
+            3D model
+          </span>
+          <div class="cap"><div class="type">Embed</div><div class="name">Product viewer</div></div>
+        </div>
+        <div class="media-tile">
+          <div class="scene scene-map"><span class="road"></span><span class="road2"></span><span class="pin"></span></div>
+          <span class="media-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3L3 5v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16"/><path d="M15 5v16"/></svg>
+            Live map
+          </span>
+          <div class="cap"><div class="type">Embed</div><div class="name">Local area</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 4: Governable -->
+<section class="sec-peach">
+  <div class="wrap feature flip">
+    <div class="copy">
+      <span class="eyebrow">Content governance</span>
+      <h2>Governable.</h2>
+      <p class="lead">Control which teams and audiences can access which content, with consistency and security across your whole organisation.</p>
+      <div class="tags">
+        <span class="tag">Sales Enablement</span>
+        <span class="tag">Client Portals</span>
+        <span class="tag">Digital Sales Rooms</span>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="mock" aria-hidden="true">
+        <div class="lib-head">
+          <span class="ttl">Published Library</span>
+          <span class="seg"><b class="on">Sales Team A</b><b class="off">Sales Team B</b></span>
+        </div>
+        <div class="lib-grid">
+          <div class="doc">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4"/></svg>
+            <div class="dname">Executive Summary</div>
+            <span class="access all">All Teams</span>
+          </div>
+          <div class="doc">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 9h16M9 9v11"/></svg>
+            <div class="dname">Pricing Schedule</div>
+            <span class="access team">Team A only</span>
+          </div>
+          <div class="doc">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 12h16M12 4v16"/></svg>
+            <div class="dname">Floor Plans, All Units</div>
+            <span class="access all">All Teams</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Built for modern sales and marketing teams (rendered once) -->
+<section class="sec-cream" id="who">
+  <div class="wrap">
+    <div class="center-head">
+      <span class="eyebrow">Who it is for</span>
+      <h2>Built for modern sales and marketing teams</h2>
+      <p>One platform for the people who create content, the people who send it, and the people who need to prove it worked.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-8-8-4 19-6z"/></svg></div>
+        <h3>Sales &amp; business development</h3>
+        <p>Send tailored, trackable content to every prospect and see exactly what they engage with before the next call.</p>
+      </div>
+      <div class="who-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8A3 3 0 0 1 6 15.9"/></svg></div>
+        <h3>Marketing &amp; enablement</h3>
+        <p>Publish approved assets once, keep every team on-message, and watch which content actually drives interest.</p>
+      </div>
+      <div class="who-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
+        <h3>Client services &amp; operations</h3>
+        <p>Give clients a clean, secure, interactive handover and keep control of who can see what, section by section.</p>
+      </div>
+    </div>
+    <div class="valuebar">
+      <div class="v"><h4>One source</h4><p>Curate once, reuse everywhere, with no duplicate files to maintain.</p></div>
+      <div class="v"><h4>Real signal</h4><p>Engagement data that goes past opens and clicks.</p></div>
+      <div class="v"><h4>Interactive</h4><p>Tours, 3D, video and maps inside a single share link.</p></div>
+      <div class="v"><h4>Governed</h4><p>Team and audience access controls built in.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA (rendered once, one consistent message + one matching CTA) -->
+<section class="cta" id="demo">
+  <div class="wrap cta-inner">
+    <span class="status"><span class="live"></span>Currently onboarding pilot customers</span>
+    <h2>See Chalkroom in action.</h2>
+    <p>We are bringing on a first group of sales and marketing teams as pilot customers. Book a demo and we will walk you through it with your own content.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#demo">Book a demo</a>
+    </div>
+    <p class="fineprint">A short call, no commitment. We will show you how your content performs inside Chalkroom.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="color:var(--green)">
+            <circle cx="16" cy="18" r="1.4" fill="currentColor" stroke="none"/>
+            <line x1="16" y1="18" x2="16" y2="4"/><circle cx="16" cy="3" r="1.2" fill="currentColor" stroke="none"/>
+            <line x1="16" y1="18" x2="7" y2="9"/><circle cx="6" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+            <line x1="16" y1="18" x2="25" y2="9"/><circle cx="26" cy="8" r="1.2" fill="currentColor" stroke="none"/>
+          </svg>
+          Chalkroom.
+        </div>
+        <p>Curate, share and measure interactive content in one platform.</p>
+        <div style="margin-top:22px;"><a class="btn btn-primary" href="#demo">Book a demo</a></div>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#features">About</a>
+        <a href="#features">Resources</a>
+        <a href="#demo">Book a demo</a>
+      </div>
+      <div class="foot-col">
+        <h5>Use cases</h5>
+        <a href="#features">Sales &amp; Pipeline</a>
+        <a href="#features">Content &amp; Marketing</a>
+        <a href="#features">Client Delivery</a>
+      </div>
+      <div class="foot-col">
+        <h5>Teams</h5>
+        <a href="#who">Sales &amp; BD</a>
+        <a href="#who">Marketing &amp; Enablement</a>
+        <a href="#who">Client Services</a>
+      </div>
+      <div class="foot-col">
+        <h5>Follow us</h5>
+        <a href="#top">LinkedIn</a>
+        <a href="#top">X</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Copyright 2026 Chalkroom. Lucid Forge Ltd. All rights reserved.</span>
+      <a href="#top">Privacy Policy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
